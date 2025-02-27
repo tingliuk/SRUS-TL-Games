@@ -67,7 +67,25 @@ class PlayerList:
                     current.next.prev=current.prev
                 return
             current=current.next #move to next node
+    def display(self,forward=True):
+        if self.is_empty():
+            print("List is Empty")
 
+        if self._head==self._tail:
+            print(f"ID:{self._head.player.uid},Name:{self._head.player.name}")
+
+        if forward:
+            current=self._head
+            print("List from head to tail")
+            while current:
+                print(f"ID: {current.player.vid}, Name: {current.player.name}")
+                current=current.next
+        else:
+            current=self._tail
+            print("List from tail to head")
+            while current:
+                print(f"ID: {current.player.vid}, Name: {current.player.name}")
+                current = current.prev
 
 
 
