@@ -34,7 +34,7 @@ class PlayerList:
         self._tail=node
 
 
-    def delete_head_node(self,player):
+    def delete_head_node(self):
         if self._head is None: #empty list, nothing to delete
             return
         elif self._head==self._tail:# list only has one node
@@ -44,7 +44,7 @@ class PlayerList:
             self._head=self._head.next
             self._head.prev=None
 
-    def delete_tail_node(self,player):
+    def delete_tail_node(self):
         if self._tail is None:#empty list, nothing to delete
             return
         elif self._head==self._tail:# list only has one node
@@ -53,6 +53,21 @@ class PlayerList:
         else:
             self._tail=self._tail.prev
             self._tail.next=None
+
+    def delete_node_by_key(self,key):
+        current=self._head
+        while self._head is not None:
+            if current.player==key:
+                if current==self._head:#key on head
+                    self.delete_head_node()
+                elif current==self._tail:#key on tail
+                    self.delete_tail_node()
+                else:#key in between head and tail
+                    current.prev.next=current.next
+                    current.next.prev=current.prev
+                return
+            current=current.next #move to next node
+
 
 
 
