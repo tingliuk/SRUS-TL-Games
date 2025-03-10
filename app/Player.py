@@ -11,5 +11,20 @@ class Player:
     def name(self):
         return self._name #return the name of the player
 
+    @classmethod
+    def sum_of_ascii_values(key: str, size: int) -> int:
+        total = 0
+        for char in key:
+            total += ord(char)
+        return total % size
+
+    def __hash__(self):
+        return self.sum_of_ascii_values(self._uid,10)
+
+    def __eq__(self, other):
+        if isinstance(other, Player): #check if two players are equal base on uid
+            return self._uid == other._uid
+        return False
+
     def __str__(self):
         return f"Player[ID:{self._uid},Name:{self._name}]"
