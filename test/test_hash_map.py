@@ -9,76 +9,52 @@ class TestPlayerHashMap(unittest.TestCase):
         self.hash_map=PlayerHashMap()
 
 
+    def test_set_and_get_player(self): #test inserting and retrieving a player
 
-    def test_put_and_get(self):
-        """Test inserting and retrieving a player."""
-        player = Player("001", "Amy Liu")
-        self.hash_map.put(player.uid, player)
+        self.hash_map.__setitem__("123","Amy")
+        self.hash_map.__setitem__("456","Kathy")
 
-        # Check if the player is stored correctly
-        retrieved_player = self.hash_map.get("001")
-        self.assertEqual(retrieved_player, player)
+        player=self.hash_map.__getitem__("123")
+        self.assertIsNotNone(player)
+        self.assertEqual(player.name,"Amy")
 
-    def test_get_non_existent_key(self):
-        """Test retrieving a player that does not exist."""
-        retrieved_player = self.hash_map.get("999")  # Non-existent key
+        player = self.hash_map.__getitem__("456")
+        self.assertIsNotNone(player)
+        self.assertEqual(player.name, "Kathy")
+
+    def test_get_non_existent_player(self): #test retrieving a player does not exist
+
+        retrieved_player = self.hash_map.__getitem__("111")
         self.assertIsNone(retrieved_player)
 
-    def test_update_existing_player(self):
-        """Test updating an existing player's name."""
-        player = Player("001", "Amy Liu")
-        self.hash_map.put(player.uid, player)
+    def test_update_existing_player(self): #test updating an existing player's name
 
-        updated_player = Player("001", "Kathy Liu")
-        self.hash_map.put(updated_player.uid, updated_player)
+        self.hash_map.__setitem__("123", "Amy")
+        self.hash_map.__setitem__("123", "Amiee")
 
-        # Ensure the player's name is updated
-        retrieved_player = self.hash_map.get("001")
-        self.assertEqual(retrieved_player.name, "Kathy Liu")
+        updated_player = self.hash_map.__getitem__("123")
+        self.assertEqual(updated_player.name, "Amiee")
 
-    def test_remove_existing_player(self):
-        """Test removing a player."""
-        player = Player("002", "John Doe")
-        self.hash_map.put(player.uid, player)
+    def test_length(self):  #test the length of the hash map
 
-        # Ensure the player exists before removal
-        self.assertEqual(self.hash_map.get("002"), player)
+        self.assertEqual(self.hash_map.__len__(), 0)
+        self.hash_map.__setitem__("123", "Amy")
+        self.assertEqual(self.hash_map.__len__(), 1)
+        self.hash_map.__setitem__("456", "Kathy")
+        self.assertEqual(self.hash_map.__len__(), 2)
 
-        # Remove the player
-        self.hash_map.remove("002")
+    def test_delete_player(self):  #test removing a player
 
-        # Ensure the player is removed
-        self.assertIsNone(self.hash_map.get("002"))
+        self.hash_map.__setitem__("123", "Amy")
+        self.hash_map.__delitem__("123", "Amy")
 
-    def test_remove_non_existent_player(self):
-        """Test removing a player that doesn’t exist."""
-        self.hash_map.remove("999")  # Should not raise an error
-        self.assertIsNone(self.hash_map.get("999"))
+        player = self.hash_map.__getitem__("123")
+        self.assertIsNone(player)
 
-    def test_size(self):
-        """Test the size of the hash map."""
-        self.assertEqual(self.hash_map.size(), 0)  # Initially empty
+def test_display(self): #test the display function
 
-        player1 = Player("003", "Alice Smith")
-        player2 = Player("004", "Bob Brown")
-
-        self.hash_map.put(player1.uid, player1)
-        self.hash_map.put(player2.uid, player2)
-
-        self.assertEqual(self.hash_map.size(), 2)  # Two players added
-
-        self.hash_map.remove("003")
-        self.assertEqual(self.hash_map.size(), 1)  # One player removed
-
-    def test_display(self):
-        """Test the display function (print output)."""
-        player1 = Player("005", "Eve Black")
-        player2 = Player("006", "Charlie Green")
-
-        self.hash_map.put(player1.uid, player1)
-        self.hash_map.put(player2.uid, player2)
-
-        # Manually inspect console output to verify correctness
+        self.hash_map.__setitem__("123", "Amy")
+        self.hash_map.__setitem__("456", "Kathy")
         self.hash_map.display()
 
 

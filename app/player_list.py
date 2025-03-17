@@ -57,7 +57,7 @@ class PlayerList:
     def delete_node_by_key(self,key):
         current=self._head
         while self._head is not None:
-            if current.player==key:
+            if current.player.uid==key:
                 if current==self._head:#key on head
                     self.delete_head_node()
                 elif current==self._tail:#key on tail

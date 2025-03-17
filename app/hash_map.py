@@ -16,7 +16,7 @@ class PlayerHashMap:
         if isinstance(key,Player):  #if the key is an instance of the Player class, it uses built-in hash function on the Player object.
             return hash(key)%self._size
         else:#If the key is a str, it calls a class method
-            return Player._hash(key)%self._size
+            return Player.sum_of_ascii_values(key,10)
 
     def __setitem__(self, key:str ,name:str) -> None:
         index = self.get_index(key)
@@ -24,8 +24,8 @@ class PlayerHashMap:
 
         current=player_list.head  #check if the player already exist
         while current:
-            if current.player.key==key:
-                current.player.name=name
+            if current.player.uid==key:
+                current.player._name=name
                 return
             current=current.next
 
@@ -38,7 +38,7 @@ class PlayerHashMap:
         current=self._table[index].head
 
         while current:  #iterate through the linklist to find the player
-            if current.player.id==key:
+            if current.player.uid==key:
                 return current.player  # return the found player
             current=current.next
 
