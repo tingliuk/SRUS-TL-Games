@@ -1,3 +1,4 @@
+import random
 class Player:
     def __init__(self, name, uid, score: int):
         self.name = name
@@ -23,8 +24,8 @@ class Player:
 
     def __repr__(self):
         return f"Player: {self.name}, Score: {self.score}"
-
-    def sort_quickly(self, players):
+    @staticmethod
+    def sort_quickly( players):
         if len(players) <= 1:
             return players
         pivot = players[0]
@@ -35,4 +36,15 @@ class Player:
                 left.append(x)
             else:
                 right.append(x)
-        return self.sort_quickly(left) + [pivot] + self.sort_quickly(right)
+        return Player.sort_quickly(left) + [pivot] + Player.sort_quickly(right)
+    @classmethod
+    def sort_descending(cls, players):
+        if len(players) <= 1:
+            return players
+        #pivot = players[0]
+        pivot = random.choice(players)  # Choose a random pivot
+        left = [p for p in players if p.score > pivot.score]  # Higher scores go left
+        middle = [p for p in players if p.score == pivot.score]  # Handle duplicates
+        right = [p for p in players if p.score < pivot.score]  # Lower scores go right
+        return cls.sort_descending(left) + middle + cls.sort_descending(right)
+

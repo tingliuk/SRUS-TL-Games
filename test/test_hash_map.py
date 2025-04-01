@@ -1,7 +1,7 @@
 import unittest
 from app.hash_map import PlayerHashMap
 from app.player_list import PlayerList
-from app.Player import Player
+from app.player import Player
 
 class TestPlayerHashMap(unittest.TestCase):
 

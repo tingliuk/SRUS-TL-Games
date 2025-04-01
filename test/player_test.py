@@ -1,5 +1,5 @@
 import unittest
-from app.Player import Player
+from app.player import Player
 
 class TestPlayer(unittest.TestCase):
     def test_uid_property(self):

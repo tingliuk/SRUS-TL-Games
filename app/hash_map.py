@@ -1,7 +1,7 @@
 from tkinter.font import names
 
 from app.player_list import PlayerList
-from app.Player import Player
+from app.player import Player
 
 class PlayerHashMap:
     def __init__(self,size=10):
