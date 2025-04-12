@@ -30,3 +30,19 @@ class TestPlayerBST(unittest.TestCase):
         root=self.tree.root
         self.assertEqual(root.player.score, 20)# check if root has been updated to new score
 
+    def test_search_existing_player(self):
+        self.tree.insert(self.p1) #insert player "Bob"
+        self.tree.insert(self.p2)
+        self.tree.insert(self.p3)
+        node=self.tree.search("Bob")
+        assert node is not None
+        assert node.player.name=="Bob"
+
+    def test_search_non_existing_player(self):
+        self.tree.insert(self.p1)
+        self.tree.insert(self.p2)
+        node=self.tree.search("Amy")# search a player doesn't exist
+        assert node is None
+
+
+
