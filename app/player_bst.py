@@ -38,3 +38,30 @@ class PlayerBST:
             return self._search_recursive(current_node.left,name)
         else:
              return self._search_recursive(current_node.right,name)
+
+
+    def to_sorted_list(self): #create a sorted list
+        list=[]
+        self._inorder_traversal(self.root,list)
+        return list
+    def _inorder_traversal(self,node,list):
+        if node:
+            self._inorder_traversal(node.left,list)
+            list.append(node.player)
+            self._inorder_traversal(node.right,list)
+    def balance(self):# new binary tree will be balanced since we got the middle node as root
+        sorted_players=self.to_sorted_list()# new sorted list
+        self._root=self._build_balanced_bst(sorted_players)# set the middle node as root
+
+    def _build_balanced_bst(self, players):
+        if not players:
+            return None
+
+        mid = len(players) // 2
+        node = PlayerBNode(players[mid])
+        node.left = self._build_balanced_bst(players[:mid])#left children of the root
+        node.right = self._build_balanced_bst(players[mid + 1:])#right children of the root
+        return node
+
+
+
